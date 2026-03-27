@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#0a0a0f">
+    <title>Genius AI</title>
+    <link rel="stylesheet" href="/static/css/genius.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Animated background -->
+        <div class="bg-grid"></div>
+
+        <!-- Status bar -->
+        <header class="status-bar">
+            <div class="status-left">
+                <span class="logo">G</span>
+                <span class="app-title">GENIUS AI</span>
+            </div>
+            <div class="status-right">
+                <span id="status-indicator" class="status-dot offline"></span>
+                <span id="status-text">Offline</span>
+            </div>
+        </header>
+
+        <!-- Main conversation area -->
+        <main class="conversation" id="conversation">
+            <div class="welcome-message">
+                <div class="genius-orb" id="genius-orb">
+                    <div class="orb-ring ring-1"></div>
+                    <div class="orb-ring ring-2"></div>
+                    <div class="orb-ring ring-3"></div>
+                    <div class="orb-core"></div>
+                </div>
+                <h1>GENIUS AI</h1>
+                <p class="subtitle">Your Personal AI Assistant</p>
+                <p class="hint">Say <strong>"Hey Genius"</strong> or tap the mic to begin</p>
+            </div>
+
+            <div id="messages" class="messages"></div>
+        </main>
+
+        <!-- Input area -->
+        <footer class="input-area">
+            <div class="input-container">
+                <button id="mic-btn" class="mic-button" title="Tap to speak">
+                    <svg class="mic-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+                        <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                        <line x1="12" y1="19" x2="12" y2="23"/>
+                        <line x1="8" y1="23" x2="16" y2="23"/>
+                    </svg>
+                    <div class="mic-pulse"></div>
+                </button>
+
+                <div class="text-input-wrapper">
+                    <input type="text" id="text-input" placeholder="Type a command or say 'Hey Genius'..." autocomplete="off">
+                    <button id="send-btn" class="send-button" title="Send">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="22" y1="2" x2="11" y2="13"/>
+                            <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div id="listening-indicator" class="listening-indicator hidden">
+                <div class="wave-bars">
+                    <span></span><span></span><span></span><span></span><span></span>
+                </div>
+                <span class="listening-text">Listening...</span>
+            </div>
+        </footer>
+    </div>
+
+    <script src="/static/js/genius.js"></script>
+</body>
+</html>
