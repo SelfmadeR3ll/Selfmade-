@@ -15,16 +15,9 @@ from datetime import datetime, timedelta
 
 from genius_ai.config import settings
 
-# Google API imports - gracefully handle if not installed yet
-try:
-    from google.auth.transport.requests import Request
-    from google.oauth2.credentials import Credentials
-    from google_auth_oauthlib.flow import InstalledAppFlow
-    from googleapiclient.discovery import build
-
-    GOOGLE_AVAILABLE = True
-except ImportError:
-    GOOGLE_AVAILABLE = False
+# Google API imports are deferred to connect() time to avoid
+# crashing the app if google libs have missing system dependencies.
+GOOGLE_AVAILABLE = None  # will be set on first connect attempt
 
 
 class CalendarManager:
@@ -34,13 +27,34 @@ class CalendarManager:
         self.service = None
         self.is_connected = False
 
+    @staticmethod
+    def _load_google_libs():
+        """Try to import Google libraries at runtime."""
+        global GOOGLE_AVAILABLE
+        if GOOGLE_AVAILABLE is not None:
+            return GOOGLE_AVAILABLE
+        try:
+            import google.auth.transport.requests  # noqa: F401
+            import google.oauth2.credentials  # noqa: F401
+            import google_auth_oauthlib.flow  # noqa: F401
+            import googleapiclient.discovery  # noqa: F401
+            GOOGLE_AVAILABLE = True
+        except Exception:
+            GOOGLE_AVAILABLE = False
+        return GOOGLE_AVAILABLE
+
     def connect(self) -> bool:
         """
         Authenticate and connect to Google Calendar.
         Uses OAuth 2.0 flow - first time will open a browser for auth.
         """
-        if not GOOGLE_AVAILABLE:
+        if not self._load_google_libs():
             return False
+
+        from google.auth.transport.requests import Request
+        from google.oauth2.credentials import Credentials
+        from google_auth_oauthlib.flow import InstalledAppFlow
+        from googleapiclient.discovery import build
 
         creds = None
 
