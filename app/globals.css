@@ -1,0 +1,172 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Custom properties ─────────────────────────── */
+:root {
+  --font-display: 'Syne', 'Space Grotesk', system-ui, sans-serif;
+  --font-body:    'Space Grotesk', system-ui, sans-serif;
+}
+
+/* ── Base resets ───────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  background-color: #07070B;
+  color: #EAE8F5;
+  font-family: var(--font-body);
+  overflow-x: hidden;
+}
+
+/* ── Custom scrollbar ──────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #07070B; }
+::-webkit-scrollbar-thumb { background: #1E1E2C; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #C8FF00; }
+
+/* ── Utility classes ───────────────────────────── */
+@layer utilities {
+  .text-gradient-lime {
+    background: linear-gradient(135deg, #C8FF00 0%, #80FF00 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-gradient-pink {
+    background: linear-gradient(135deg, #FF1F71 0%, #FF6BA8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-gradient-multi {
+    background: linear-gradient(135deg, #C8FF00 0%, #00E5FF 40%, #9B5CFF 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    background-size: 200% 200%;
+    animation: gradientShift 6s ease infinite;
+  }
+
+  .text-gradient-hero {
+    background: linear-gradient(160deg, #ffffff 0%, #C8FF00 50%, #00E5FF 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .border-gradient-lime {
+    border: 1px solid transparent;
+    background-clip: padding-box;
+    position: relative;
+  }
+  .border-gradient-lime::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    background: linear-gradient(135deg, rgba(200,255,0,0.5), rgba(0,229,255,0.2));
+    z-index: -1;
+  }
+
+  .glass {
+    background: rgba(19,19,28,0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+
+  .glow-lime  { box-shadow: 0 0 32px rgba(200,255,0,0.3); }
+  .glow-pink  { box-shadow: 0 0 32px rgba(255,31,113,0.3); }
+  .glow-cyan  { box-shadow: 0 0 32px rgba(0,229,255,0.3); }
+
+  .gradient-border {
+    background: linear-gradient(#12121A, #12121A) padding-box,
+                linear-gradient(135deg, rgba(200,255,0,0.4), rgba(0,229,255,0.2), rgba(155,92,255,0.3)) border-box;
+    border: 1px solid transparent;
+  }
+
+  .gradient-border-pink {
+    background: linear-gradient(#12121A, #12121A) padding-box,
+                linear-gradient(135deg, rgba(255,31,113,0.5), rgba(155,92,255,0.3)) border-box;
+    border: 1px solid transparent;
+  }
+
+  .noise {
+    position: relative;
+  }
+  .noise::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+    pointer-events: none;
+    opacity: 0.5;
+    border-radius: inherit;
+  }
+
+  .animate-delay-100 { animation-delay: 0.1s; }
+  .animate-delay-200 { animation-delay: 0.2s; }
+  .animate-delay-300 { animation-delay: 0.3s; }
+  .animate-delay-400 { animation-delay: 0.4s; }
+  .animate-delay-500 { animation-delay: 0.5s; }
+  .animate-delay-600 { animation-delay: 0.6s; }
+  .animate-delay-700 { animation-delay: 0.7s; }
+  .animate-delay-800 { animation-delay: 0.8s; }
+}
+
+/* ── Product glass art shapes ──────────────────── */
+.product-art {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Countdown flip style ──────────────────────── */
+.flip-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 72px;
+}
+
+/* ── Accordion ─────────────────────────────────── */
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1);
+}
+.faq-answer.open {
+  max-height: 300px;
+}
+
+/* ── Custom select ─────────────────────────────── */
+select option {
+  background: #12121A;
+  color: #EAE8F5;
+}
+
+/* ── Announcement marquee ──────────────────────── */
+@keyframes ticker {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.ticker-track {
+  display: inline-flex;
+  white-space: nowrap;
+  animation: ticker 28s linear infinite;
+}
+
+/* ── Gradient background shift ─────────────────── */
+@keyframes gradientShift {
+  0%,100% { background-position: 0% 50%; }
+  50%     { background-position: 100% 50%; }
+}
