@@ -1,0 +1,26 @@
+{
+  "name": "selfmade-discord-bot",
+  "version": "1.0.0",
+  "description": "SelfmadeR3ll — Full-featured Discord community & brand bot",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "deploy": "node src/deploy-commands.js",
+    "setup": "node setup/serverSetup.js"
+  },
+  "dependencies": {
+    "@discordjs/voice": "^0.17.0",
+    "@discord-player/extractor": "^4.4.7",
+    "chalk": "^4.1.2",
+    "discord-player": "^6.6.9",
+    "discord.js": "^14.14.1",
+    "dotenv": "^16.4.5",
+    "ffmpeg-static": "^5.2.0",
+    "libsodium-wrappers": "^0.7.15",
+    "opusscript": "^0.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}
